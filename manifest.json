@@ -4,11 +4,11 @@
   "version": "1.0.2",
   "description": "在我的文库和最近阅读中隐藏 SettingsSync 配置条目，保留原始数据。",
   "author": "Mr.Hao",
-  "homepage_url": "https://github.com/renhao12356578/zotero-except",
+  "homepage_url": "https://github.com/haohaomin/zotero-except",
   "applications": {
     "zotero": {
       "id": "zotero-except@local",
-      "update_url": "https://github.com/renhao12356578/zotero-except/releases/latest/download/updates.json",
+      "update_url": "https://github.com/haohaomin/zotero-except/releases/latest/download/updates.json",
       "strict_min_version": "7.0",
       "strict_max_version": "10.0.*"
     }

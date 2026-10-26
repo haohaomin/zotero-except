@@ -1,7 +1,7 @@
 # Zotero Except
 
-[![CI](https://github.com/renhao12356578/zotero-except/actions/workflows/ci.yml/badge.svg)](https://github.com/renhao12356578/zotero-except/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/renhao12356578/zotero-except?display_name=tag)](https://github.com/renhao12356578/zotero-except/releases)
+[![CI](https://github.com/haohaomin/zotero-except/actions/workflows/ci.yml/badge.svg)](https://github.com/haohaomin/zotero-except/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/haohaomin/zotero-except?display_name=tag)](https://github.com/haohaomin/zotero-except/releases)
 [![License: AGPL-3.0-or-later](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg)](LICENSE)
 
 一个面向 Zotero 7–10 的轻量插件，用于把 Zotero Settings Sync 的内部配置条目从聚合视图中隐藏。
@@ -10,7 +10,7 @@
 
 ## 安装
 
-1. 从 [Releases](https://github.com/renhao12356578/zotero-except/releases) 下载最新的 `.xpi` 文件（不要下载 Source code zip）。
+1. 从 [Releases](https://github.com/haohaomin/zotero-except/releases) 下载最新的 `.xpi` 文件（不要下载 Source code zip）。
 2. 打开 Zotero → 工具 → 插件。
 3. 在插件管理器齿轮菜单中选择“从文件安装插件”。
 4. 选择下载的 `.xpi` 文件，安装后重启 Zotero。

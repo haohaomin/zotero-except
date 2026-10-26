@@ -30,7 +30,7 @@ jobs:
           version, digest = sys.argv[1:]
           print(json.dumps({"addons": {"zotero-except@local": {"updates": [{
               "version": version,
-              "update_link": f"https://github.com/renhao12356578/zotero-except/releases/download/v{version}/zotero-except-{version}.xpi",
+              "update_link": f"https://github.com/haohaomin/zotero-except/releases/download/v{version}/zotero-except-{version}.xpi",
               "update_hash": f"sha256:{digest}",
               "applications": {"zotero": {"strict_min_version": "7.0", "strict_max_version": "10.0.*"}}
           }]}}}, indent=2))
