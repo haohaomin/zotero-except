@@ -1,0 +1,9 @@
+{
+  "name": "zotero-except",
+  "version": "1.0.2",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "build": "python3 scripts/build.py"
+  }
+}
