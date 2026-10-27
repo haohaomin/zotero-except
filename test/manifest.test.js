@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const { execFileSync } = require('node:child_process');
+const { findArchive, readArchive } = require('../scripts/zotero-archive.cjs');
 
 test('release metadata includes required Zotero installation fields', () => {
   const manifest = JSON.parse(fs.readFileSync('manifest.json'));
@@ -17,12 +17,10 @@ test('release metadata includes required Zotero installation fields', () => {
   assert.equal(new URL(application.update_url).protocol, 'https:');
 });
 
-const installedArchive = '/Applications/Zotero.app/Contents/Resources/omni.ja';
+const installedArchive = findArchive('platform');
 test('installed Zotero manifest requirements reject the old package and accept the new manifest',
-  { skip: !fs.existsSync(installedArchive) }, () => {
-    const source = execFileSync('python3', ['-c',
-      'import zipfile,sys; print(zipfile.ZipFile(sys.argv[1]).read("modules/Extension.sys.mjs").decode())',
-      installedArchive], { encoding: 'utf8', maxBuffer: 1024 * 1024 });
+  { skip: !installedArchive && 'No local Zotero platform archive found' }, () => {
+    const source = readArchive(installedArchive, 'modules/Extension.sys.mjs');
     // Execute the actual installed Zotero-specific validation block, without
     // invoking the app, installing an extension, or touching the user's profile.
     const start = source.indexOf('if (!manifest.applications?.zotero?.id)');

@@ -15,8 +15,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: npm test
       - run: npm run build
+      - run: node scripts/python.cjs scripts/verify-package.py
       - name: Verify tag matches manifest
         run: test "${GITHUB_REF_NAME#v}" = "$(node -p "require('./manifest.json').version")"
       - name: Generate update manifest

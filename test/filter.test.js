@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
-const { execFileSync } = require('node:child_process');
+const { findArchive, readArchive } = require('../scripts/zotero-archive.cjs');
 
 function fixture() {
   const collections = [{ id: 10, key: 'SYNC0001', name: '[SettingsSync] DO NOT DELETE' }];
@@ -131,12 +131,10 @@ test('query execution failures fall back with the original arguments; successful
   assert.equal(f.errors.length, 1);
 });
 
-const archive = '/Applications/Zotero.app/Contents/Resources/app/omni.ja';
+const archive = findArchive('app');
 test('installed Zotero addCondition reproduces 1.0.1 error and accepts the fixed plugin in both views',
-  { skip: !fs.existsSync(archive) }, async () => {
-    const source = execFileSync('python3', ['-c',
-      'import zipfile,sys; print(zipfile.ZipFile(sys.argv[1]).read("chrome/content/zotero/xpcom/data/search.js").decode())',
-      archive], { encoding: 'utf8', maxBuffer: 1024 * 1024 });
+  { skip: !archive && 'No local Zotero app archive found' }, async () => {
+    const source = readArchive(archive, 'chrome/content/zotero/xpcom/data/search.js');
     const start = source.indexOf('Zotero.Search.prototype.addCondition = function');
     const end = source.indexOf('\n};', start) + 3;
     assert.ok(start >= 0 && end > start);

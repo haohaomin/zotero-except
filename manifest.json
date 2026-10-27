@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Zotero Except — 隐藏同步配置",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "在我的文库和最近阅读中隐藏 SettingsSync 配置条目，保留原始数据。",
   "author": "Mr.Hao",
   "homepage_url": "https://github.com/haohaomin/zotero-except",

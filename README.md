@@ -15,9 +15,19 @@
 3. 在插件管理器齿轮菜单中选择“从文件安装插件”。
 4. 选择下载的 `.xpi` 文件，安装后重启 Zotero。
 
+Windows、macOS、Linux 共用同一份 `.xpi`，无需单独下载 Windows 版。在 Windows 中从 Zotero 窗口顶部的“工具 → 插件”进入安装，不要用浏览器或解压软件打开 `.xpi`。安装插件无需 Node.js、Python 或命令行。
+
+## 操作系统与验证范围
+
+插件运行时只使用 Zotero JavaScript 接口，无系统命令、原生二进制或操作系统专用路径。1.0.3 增加 Windows/macOS/Linux 三平台构建与测试矩阵，覆盖中文路径、空格路径、UTF-8 清单和 ZIP 内容校验。
+
+自动化测试验证的是过滤逻辑、构建和包装。Windows Zotero 界面内的安装及实际过滤效果仍需实机验收，不能将 CI 通过视为 GUI 测试通过。不同 Zotero 版本不一定提供“最近阅读”视图；该视图存在时才会应用对应过滤。
+
+Windows 验收步骤：安装后依次打开“我的文库”“最近阅读”和 SettingsSync 集合，确认前两个视图隐藏配置但保留正常文献，直接打开集合时仍显示配置；然后测试停用/启用插件和重启后的恢复情况。
+
 1.0.2 修复 Zotero 10 已移除 `Search.addCondition()` 第四个 `required` 参数造成的列表加载错误。新的外层搜索默认按 AND 组合条件，无需旧参数。增加构建/执行过滤查询失败时回退到原始视图的保护，此时配置条目可能重新显示，但正常文献仍可访问。
 
-1.0.1 修复安装清单缺少 `applications.zotero.update_url` 导致 Zotero 10.0.6 拒绝安装的问题。此个人版本没有更新服务器，使用保留的 `.invalid` 域名满足清单要求；自动检查不会取得更新，后续版本需手动安装。
+1.0.1 修复安装清单缺少 `applications.zotero.update_url` 导致 Zotero 10.0.6 拒绝安装的问题。当前 GitHub 发布版使用 Release 中的更新清单检查后续版本。
 
 ## 行为
 
@@ -45,7 +55,7 @@
 
 版本号同时维护在 `manifest.json` 和 `package.json`。运行 `npm test` 检查代码，运行 `npm run build` 生成 `dist/zotero-except-<version>.xpi`。推送形如 `v1.0.2` 的 tag 会触发 GitHub Actions，重新构建 XPI、生成 SHA-256 校验值并创建 GitHub Release。Release 资产是插件安装包，仓库源码压缩包不是安装包。
 
-插件市场提交使用 [Zotero Plugins Atlas](https://zoteroplugins.org/submit)，这是独立于 Zotero 官方的社区目录；其流程会先检查公开仓库 Release 中是否存在 `.xpi`，然后进行代码检查。
+插件市场通过 [syt2/zotero-addons-scraper](https://github.com/syt2/zotero-addons-scraper) 收录，提交记录为 [PR #289](https://github.com/syt2/zotero-addons-scraper/pull/289)。
 
 参考：[官方插件开发文档](https://www.zotero.org/support/dev/zotero_7_for_developers)、[集合视图查询源码](https://github.com/zotero/zotero/blob/main/chrome/content/zotero/xpcom/collectionTreeRow.js)、[搜索引擎源码](https://github.com/zotero/zotero/blob/main/chrome/content/zotero/xpcom/data/search.js)。
 
